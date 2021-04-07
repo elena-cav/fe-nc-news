@@ -47,7 +47,7 @@ class ArticlesList extends Component {
       <StyledArticles>
         <Filters sortArticles={this.sortArticles} />
 
-        <ul>
+        <ul className='articles-wrapper'>
           {articles.map(
             ({
               article_id,

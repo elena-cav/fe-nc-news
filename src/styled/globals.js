@@ -5,7 +5,7 @@ export const Globals = styled.div`
   h3,
   h4 {
     margin: 0;
-    padding: 0.5rem 0 1rem 0;
+    padding: 0.5rem 0 0.5rem 0;
     color: #d5573b;
   }
   p {

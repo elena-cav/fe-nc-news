@@ -9,13 +9,13 @@ function VoteComment({comment_id, votes}) {
   
   return (
     <StyledButtons>
-    <p onClick={() => {
+    <span onClick={() => {
             api.patchComment(comment_id, +1);
-          }}><Up/></p>
-     <p onClick={() => {
+          }}><Up/></span>
+          <p className='votes'>{votes}</p>
+     <span onClick={() => {
             api.patchComment(comment_id, -1);
-          }}><Down/></p>
-          <p>something</p>
+          }}><Down/></span>
     </StyledButtons>
   )
 }

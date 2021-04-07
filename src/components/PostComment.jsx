@@ -27,7 +27,7 @@ class PostComment extends Component {
     return (
       <StyledInputBar>
         <form onSubmit={this.handleInput}>
-          <label htmlFor="">post a comment</label>
+          <label htmlFor="">Comment as jessjelly</label>
           <textarea
             value={this.state.comment}
             onChange={this.handleChange}

@@ -14,14 +14,56 @@ export const StyledArticleCard = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
-    column-gap: 0.2rem;
     font-size: 0.9rem;
+
+    & p {
+      margin: 0.2rem;
+    }
   }
 
   .author {
     cursor: pointer;
+    position: relative;
+
+    &::after {
+      position: absolute;
+      content: '';
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1.3px;
+    }
+    &:hover::after {
+      width: 100%;
+      background-color: #d5573b;
+      transition: all 0.3s linear;
+    }
   }
-  .author:hover {
-    text-shadow: 0 0 10px #00000044;
+  .topic {
+    display: flex;
+    font-weight: 600;
+    column-gap: 0.2rem;
+    color: #4f6d7a;
+    margin: 0.5rem 0 0.2rem 0;
+    p {
+      font-size: 0.9rem;
+      margin: 0;
+      &::after {
+        position: absolute;
+        content: '';
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 1.3px;
+      }
+      &:hover::after {
+        width: 100%;
+        background-color: #d5573b;
+        transition: all 0.3s linear;
+      }
+    }
+    svg {
+      width: 0.7rem;
+    }
   }
 `;

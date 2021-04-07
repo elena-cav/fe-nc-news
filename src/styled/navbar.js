@@ -2,16 +2,10 @@ import styled from 'styled-components';
 
 export const StyledNavBar = styled.div`
   position: relative;
-  .nav-btn {
-    position: fixed;
-    top: 2rem;
-    left: 1.5rem;
-    width: 2rem;
-    fill: #d5573b;
-  }
 
   .nav-close {
     color: #d5573b;
+    cursor: pointer;
 
     svg {
       width: 1.5rem;

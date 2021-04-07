@@ -3,6 +3,13 @@ export const StyledArticles = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 3rem;
+
+  .articles-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+  }
   .filters {
     display: flex;
     flex-direction: row;
@@ -21,9 +28,13 @@ export const StyledArticles = styled.div`
       justify-content: space-between;
       column-gap: 0.3rem;
       margin: 0;
+      color: #4f6d7a;
     }
     & svg {
       width: 1rem;
+      color: #d5573b;
+    }
+    & p {
     }
   }
 `;
