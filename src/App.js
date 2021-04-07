@@ -1,24 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import { Router } from '@reach/router';
+import Header from './components/Header';
+import ArticlesList from './components/ArticlesList';
+import ArticlesByTopic from './components/ArticlesByTopic';
+import Comments from './components/Comments';
+import Nav from './components/NavBar';
+import { Globals } from './styled/globals';
+import { Container } from './styled/container';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Globals>
+      <Container>
+        <Nav />
+        <Header />
+        <Router>
+          <ArticlesList path="/" />
+          <ArticlesByTopic path="/:topic/articles" />
+          <Comments path="/articles/:article_id" />
+        </Router>
+      </Container>
+    </Globals>
   );
 }
 
