@@ -2,54 +2,51 @@ import React, { Component } from 'react';
 import * as api from '../utils/api';
 import { StyledArticles } from '../styled/articles';
 import ArticleCard from './ArticleCard';
+import Filters from './Filters';
+import { Ring } from 'react-awesome-spinners';
+import ErrorDisplay from './ErrorDisplay';
 
 class ArticlesList extends Component {
   state = {
-    articles: []
+    articles: [],
+    isLoading: true,
+    err: null
   };
   componentDidMount() {
     api.fetchArticles().then((articles) => {
-      this.setState({ articles });
-    });
+      this.setState({ articles, isLoading: false });
+    })
   }
 
-    sortArticles = (sort) => {
-    api.fetchSortedArticles(sort).then((articles) => {
-      this.setState({ articles });
-    });
+  sortArticles = (sort) => {
+    this.setState({ isLoading: true });
+    api
+      .fetchSortedArticles(sort)
+      .then((articles) => {
+        this.setState({ articles, isLoading: false });
+      })
   };
 
+  filterByAuthor = (author) => {
+   this.setState({ isLoading: true });
+    api
+      .fetchFilteredArticles(author)
+      .then((articles) => {
+        this.setState({ articles, isLoading: false });
+      })
+  }
+
   render() {
-    const { articles } = this.state;
+    const { articles, isLoading, err } = this.state;
+    if (isLoading) return <Ring />;
+    if (err) {
+      const { response } = err;
+      return <ErrorDisplay status={response.status} msg={response.data.msg} />;
+    }
     return (
       <StyledArticles>
-                <section className="filters">
-          <ul>
-            <li>
-              <button
-                onClick={() => {
-                  this.sortArticles('created_at');
-                }}
-              >
-                Date created
-              </button>
-            </li>
-          </ul>
-          <ul>
-            <li>
-              <button  onClick={() => {
-                  this.sortArticles('comment_count');
-                }}>Comments</button>
-            </li>
-          </ul>
-          <ul>
-            <li>
-              <button onClick={() => {
-                  this.sortArticles('votes');
-                }}>Votes</button>
-            </li>
-          </ul>
-        </section>
+        <Filters sortArticles={this.sortArticles} />
+
         <ul>
           {articles.map(
             ({
@@ -64,6 +61,7 @@ class ArticlesList extends Component {
             }) => {
               return (
                 <ArticleCard
+                filterByAuthor={this.filterByAuthor}
                   topic={topic}
                   created_at={created_at}
                   key={article_id}

@@ -3,9 +3,9 @@ import styled from 'styled-components';
 export const StyledNavBar = styled.div`
   position: relative;
   .nav-btn {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: fixed;
+    top: 2rem;
+    left: 1.5rem;
     width: 2rem;
     fill: #d5573b;
   }
@@ -36,6 +36,9 @@ export const StyledNavBar = styled.div`
     &--open {
       transform: translateX(0);
     }
+    @media screen and (min-width: 900px) {
+      transform: translateX(0);
+    }
   }
 
   .nav-items {
@@ -60,6 +63,7 @@ export const StyledNavBar = styled.div`
     .nav-close {
       display: none;
     }
+    /* color: ${(props) => (!props.isInputActive ? '#fff1e6' : '#a5a58d')}; */
   }
 `;
 

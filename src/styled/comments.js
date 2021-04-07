@@ -6,5 +6,6 @@ export const StyledComments = styled.div`
   .comment {
     border-style: solid;
     margin-bottom: 1rem;
+    padding: 1rem;
   }
 `;

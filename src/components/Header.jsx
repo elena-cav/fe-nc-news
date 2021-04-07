@@ -1,10 +1,13 @@
 import React from 'react'
-
+import {StyledHeader} from '../styled/header'
 function Header() {
   return (
-    <div>
+    <StyledHeader>
       <h2>NC News</h2>
-    </div>
+      <span className='loggedin-user'>
+        <p>jessjelly</p>
+      </span>
+    </StyledHeader>
     
   )
 }

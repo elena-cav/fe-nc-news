@@ -10,7 +10,7 @@ import * as api from '../utils/api';
 class Nav extends Component {
   state = {
     topics: [],
-    isActive: true
+    isActive: false
   };
   componentDidMount() {
     api.fetchTopics().then((topics) => {
@@ -50,8 +50,8 @@ class Nav extends Component {
                 </li>
                 {topics.map(({ slug }) => {
                   return (
-                    <li className='nav-link'>
-                      <Link key={slug} to={`/${slug}/articles`}>
+                    <li key={slug} className='nav-link'>
+                      <Link  to={`/${slug}/articles`}>
                         {slug}
                       </Link>
                     </li>

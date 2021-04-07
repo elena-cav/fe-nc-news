@@ -1,68 +1,65 @@
 import React, { Component } from 'react';
-
+import { Ring } from 'react-awesome-spinners';
+import ErrorDisplay from './ErrorDisplay';
 import * as api from '../utils/api';
 import { StyledArticles } from '../styled/articles';
 import ArticleCard from './ArticleCard';
+import Filters from './Filters';
 class ArticlesByTopic extends Component {
   state = {
-    articles: []
+    articles: [],
+    isLoading: true,
+    err: null
   };
 
   componentDidMount() {
     const { topic } = this.props;
-    api.fetchArticlesByTopic(topic).then((articles) => {
-      this.setState({ articles });
-    });
+    api
+      .fetchArticlesByTopic(topic)
+      .then((articles) => {
+        this.setState({ articles, isLoading: false });
+      })
+      .catch((err) => {
+        this.setState({ err, isLoading: false });
+      });
   }
   componentDidUpdate(prevProps) {
     const newTopic = prevProps.topic !== this.props.topic;
     if (newTopic) {
+      this.setState({ isLoading: true });
       api.fetchArticlesByTopic(this.props.topic).then((articles) => {
-        this.setState({ articles });
+        this.setState({ articles, isLoading: false });
       });
     }
   }
 
   sortArticles = (sort) => {
     const { topic } = this.props;
+    this.setState({ isLoading: true });
+
     api.fetchSortedArticlesByTopic(topic, sort).then((articles) => {
-      this.setState({ articles });
+      this.setState({ articles, isLoading: false });
+    });
+  };
+
+  filterByAuthor = (author) => {
+    this.setState({ isLoading: true });
+    api.fetchFilteredArticles(author).then((articles) => {
+      this.setState({ articles, isLoading: false });
     });
   };
 
   render() {
-    const { articles } = this.state;
+    const { articles, isLoading, err } = this.state;
+    if (isLoading) return <Ring />;
+    if (err) {
+      const { response } = err;
+      return <ErrorDisplay status={response.status} msg={response.data.msg} />;
+    }
+
     return (
       <StyledArticles>
-        <h3>Sort by</h3>
-
-        <section className="filters">
-          <ul>
-            <li>
-              <button
-                onClick={() => {
-                  this.sortArticles('created_at');
-                }}
-              >
-                Date created
-              </button>
-            </li>
-          </ul>
-          <ul>
-            <li>
-              <button  onClick={() => {
-                  this.sortArticles('comment_count');
-                }}>Comments</button>
-            </li>
-          </ul>
-          <ul>
-            <li>
-              <button onClick={() => {
-                  this.sortArticles('votes');
-                }}>Votes</button>
-            </li>
-          </ul>
-        </section>
+        <Filters sortArticles={this.sortArticles} />
         <ul>
           {articles.map(
             ({
@@ -77,7 +74,8 @@ class ArticlesByTopic extends Component {
             }) => {
               return (
                 <ArticleCard
-                topic={topic}
+                  filterByAuthor={this.filterByAuthor}
+                  topic={topic}
                   created_at={created_at}
                   key={article_id}
                   author={author}
