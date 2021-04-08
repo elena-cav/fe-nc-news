@@ -32,7 +32,7 @@ export const StyledArticleCard = styled.div`
       bottom: 0;
       left: 0;
       width: 0;
-      height: 1.3px;
+      height: 2px;
     }
     &:hover::after {
       width: 100%;
@@ -66,5 +66,9 @@ export const StyledArticleCard = styled.div`
     svg {
       width: 0.7rem;
     }
+  }
+  button {
+    margin-top: 1rem;
+    align-self: center;
   }
 `;

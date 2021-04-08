@@ -3,7 +3,7 @@ import { ReactComponent as Heart } from '../images/heart-solid.svg';
 import { ReactComponent as Clock } from '../images/clock-solid.svg';
 import { ReactComponent as Comment } from '../images/comment-solid.svg';
 
-function Filters({ sortArticles }) {
+function Sort({ sortArticles }) {
   return (
     <>
       <section className="filters">
@@ -45,4 +45,4 @@ function Filters({ sortArticles }) {
   );
 }
 
-export default Filters;
+export default Sort;

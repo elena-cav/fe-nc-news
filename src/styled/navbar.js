@@ -25,12 +25,14 @@ export const StyledNavBar = styled.div`
     text-align: left;
     transform: translateX(-120%);
     transition: transform 0.2s ease-in-out;
+    box-shadow: 0 0 7px #00000044;
 
     &--open {
       transform: translateX(0);
     }
     @media screen and (min-width: 900px) {
       transform: translateX(0);
+      box-shadow: none;
     }
   }
 

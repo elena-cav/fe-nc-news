@@ -33,9 +33,13 @@ export const StyledHeader = styled.div`
   }
 
   h2 {
+    position: relative;
+
+    @media screen and (min-width: 500px) {
+      left: 30%;
+    }
     @media screen and (min-width: 900px) {
-      position: relative;
-      left: 5%;
+      left: 85%;
     }
   }
 

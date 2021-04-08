@@ -1,12 +1,10 @@
 import React from 'react';
-
-import VoteComment from './VoteComment';
-import * as api from '../utils/api';
+import Vote from './Vote';
 import { convertTime } from '../utils/utils';
 
-function CommentCard({ comments }) {
+function CommentCard({ comments, deleteComment }) {
   return (
-    <ul className='comments-wrapper'>
+    <ul className="comments-wrapper">
       {comments.map(({ created_at, comment_id, body, author, votes }) => {
         const convertedTime = convertTime(created_at);
 
@@ -19,13 +17,13 @@ function CommentCard({ comments }) {
             {author === 'jessjelly' ? (
               <button
                 onClick={() => {
-                  api.deleteComment(comment_id);
+                  deleteComment(comment_id);
                 }}
               >
                 delete comment
               </button>
             ) : (
-              <VoteComment votes={votes} comment_id={comment_id} />
+              <Vote votes={votes} id={comment_id} item="comments" />
             )}
           </li>
         );

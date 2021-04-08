@@ -1,6 +1,8 @@
 import React from 'react'
 import {StyledHeader} from '../styled/header'
+import { Link } from '@reach/router';
 import { ReactComponent as MenuBtn } from '../images/menu-btn.svg';
+
 
 function Header({openMenu}) {
   return (
@@ -8,7 +10,7 @@ function Header({openMenu}) {
       <p className="nav-btn" id="nav-btn" onClick={openMenu}>
            <MenuBtn/>
           </p>
-      <h2>NC News</h2>
+      <Link to={'/'}><h2>NC News</h2> </Link>
       <h4 className='loggedin-user'>
         jessjelly
       </h4>

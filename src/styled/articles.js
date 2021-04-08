@@ -3,6 +3,43 @@ export const StyledArticles = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 3rem;
+  align-items: center;
+
+  ul {
+    padding-inline-start: 0px;
+  }
+
+  .page-btn-wrapper {
+    display: flex;
+    column-gap: 1rem;
+    align-items: center;
+
+    button {
+      padding: 0;
+      border-radius: 0;
+      border: 0;
+      box-shadow: none;
+      overflow: hidden;
+      white-space: nowrap;
+      text-indent: 120%;
+      background-color: transparent;
+      position: relative;
+      width: 1.5rem;
+      height: 1.5rem;
+
+      svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    & svg:hover {
+      opacity: 0.8;
+    }
+  }
 
   .filters {
     display: flex;

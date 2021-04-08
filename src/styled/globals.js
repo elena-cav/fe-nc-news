@@ -30,6 +30,7 @@ export const Globals = styled.div`
   button:hover {
     transform: scale(1.03);
     background-color: #f5f5f5;
+    cursor: pointer;
   }
   ul {
     list-style: none;
@@ -41,5 +42,12 @@ export const Globals = styled.div`
   }
   a:hover {
     opacity: 0.7;
+  }
+
+  .ring div div {
+    border-top-color: red;
+    position: relative;
+    top: 100px;
+    left: -80%;
   }
 `;

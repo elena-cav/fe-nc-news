@@ -2,7 +2,6 @@ import './App.css';
 import { Router } from '@reach/router';
 import Header from './components/Header';
 import ArticlesList from './components/ArticlesList';
-import ArticlesByTopic from './components/ArticlesByTopic';
 import Comments from './components/Comments';
 import Nav from './components/NavBar';
 import { Globals } from './styled/globals';
@@ -28,7 +27,7 @@ class App extends Component {
           <Header openMenu={this.openMenu} />
           <Router>
             <ArticlesList path="/" />
-            <ArticlesByTopic path="/:topic/articles" />
+            <ArticlesList path="/:topic/articles" />
             <Comments path="/articles/:article_id" />
             <ErrorDisplay
               default
