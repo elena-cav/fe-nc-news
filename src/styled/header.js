@@ -8,7 +8,17 @@ export const StyledHeader = styled.div`
   top: 0;
   left: 0;
   box-shadow: 0 0 5px #00000044;
+  justify-content: space-between;
+  padding-left: 2rem;
+  align-items: center;
+  z-index: 2;
+  min-height: 3rem;
 
+  @media screen and (min-width: 900px) {
+    box-shadow: none;
+    background-color: #eaeaea;
+    justify-content: center;
+  }
   .nav-btn {
     top: 2rem;
     left: 1.5rem;
@@ -16,17 +26,28 @@ export const StyledHeader = styled.div`
     fill: #d5573b;
     z-index: 2;
     cursor: pointer;
+
+    @media screen and (min-width: 900px) {
+      display: none;
+    }
+  }
+
+  h2 {
+    @media screen and (min-width: 900px) {
+      position: relative;
+      left: 5%;
+    }
   }
 
   .loggedin-user {
-    background-color: white;
+    padding-right: 4rem;
     width: fit-content;
     font-size: 0.9rem;
-    padding: 0 0.5rem 0 0.5rem;
-    right: 0;
+    text-align: center;
 
-    & p {
-      text-align: center;
+    @media screen and (min-width: 900px) {
+      position: absolute;
+      right: 30px;
     }
   }
 `;

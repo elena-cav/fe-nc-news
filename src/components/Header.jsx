@@ -9,9 +9,9 @@ function Header({openMenu}) {
            <MenuBtn/>
           </p>
       <h2>NC News</h2>
-      <span className='loggedin-user'>
-        <p>jessjelly</p>
-      </span>
+      <h4 className='loggedin-user'>
+        jessjelly
+      </h4>
     </StyledHeader>
     
   )

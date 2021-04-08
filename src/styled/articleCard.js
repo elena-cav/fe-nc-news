@@ -5,6 +5,7 @@ export const StyledArticleCard = styled.div`
   align-items: space-between;
   margin-bottom: 1rem;
   padding: 1rem;
+  min-width: 270px;
   max-width: 640px;
   box-shadow: 0 0 7px #00000044;
   background-color: #fff;

@@ -19,7 +19,6 @@ export const StyledNavBar = styled.div`
     left: 0;
     height: 100%;
     background: #fff;
-    box-shadow: 0 0 10px #00000044;
     z-index: 999;
     padding: 1rem 0;
     font-size: 1.3rem;

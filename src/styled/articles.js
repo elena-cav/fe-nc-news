@@ -4,12 +4,6 @@ export const StyledArticles = styled.div`
   flex-direction: column;
   margin-top: 3rem;
 
-  .articles-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0;
-  }
   .filters {
     display: flex;
     flex-direction: row;
