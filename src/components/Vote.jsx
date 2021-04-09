@@ -11,6 +11,7 @@ class Vote extends React.Component {
 
   updateVotes = (id, increment, item) => {
     this.setState((currState) => {
+
       return {
         votesUpdates: currState.votesUpdates + increment
       };
