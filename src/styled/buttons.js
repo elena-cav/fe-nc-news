@@ -1,12 +1,38 @@
 import styled from 'styled-components';
 export const StyledButtons = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
   column-gap: 1rem;
-  svg {
+  align-items: flex-end;
+  justify-content: center;
+  p {
+    margin: 0;
+    padding: 0;
+  }
+  .btn {
+    padding: 0;
+    border-radius: 0;
+    border: 0;
+    box-shadow: none;
+    overflow: hidden;
+    white-space: nowrap;
+    text-indent: 120%;
+    background-color: transparent;
+    position: relative;
     width: 1.2rem;
-    cursor: pointer;
+    height: 1.2rem;
+
+    .btn:hover {
+      transform: scale(0) (0);
+      background-color: white;
+      cursor: pointer;
+    }
+
+    svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
   }
 `;

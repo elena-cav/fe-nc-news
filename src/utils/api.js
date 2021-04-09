@@ -47,6 +47,5 @@ export const postComment = (id, comment) => {
 };
 
 export const deleteItem = (item, id) => {
-  console.log('helloooo');
   return request.delete(`/${item}/${id}`);
 };

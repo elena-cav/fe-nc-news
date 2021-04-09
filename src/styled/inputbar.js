@@ -9,6 +9,9 @@ export const StyledInputBar = styled.div`
     row-gap: 1rem;
     align-items: center;
 
+    & label {
+      color: #4f6d7a;
+    }
     & textarea {
       max-width: 640px;
       min-width: 200px;

@@ -7,7 +7,6 @@ import { ReactComponent as Down } from '../images/thumbs-down-regular.svg';
 class Vote extends React.Component {
   state = {
     votesUpdates: 0,
-    err: null
   };
 
   updateVotes = (id, increment, item) => {
@@ -30,21 +29,22 @@ class Vote extends React.Component {
     const { votesUpdates } = this.state;
     return (
       <StyledButtons>
-        <span
+        
+        <button className='btn'
           onClick={() => {
             this.updateVotes(id, 1, item);
           }}
         >
           <Up />
-        </span>
+        </button>
         <p className="votes">{votes + votesUpdates}</p>
-        <span
+        <button className='btn'
           onClick={() => {
             this.updateVotes(id, -1, item);
           }}
         >
           <Down />
-        </span>
+        </button>
       </StyledButtons>
     );
   }

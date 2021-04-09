@@ -73,12 +73,11 @@ class ArticlesList extends Component {
 
 
   deleteArticle = (id) => {
-    console.log('here')
     let articles; 
     this.setState((currState) => {
       articles = [...currState.articles];
       const newArticles = articles.filter((article) => {
-        return article.article !== id;
+        return article.article_id !== id;
       });
       return { articles: newArticles};
     });

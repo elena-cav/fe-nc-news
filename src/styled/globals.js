@@ -32,6 +32,7 @@ export const Globals = styled.div`
     background-color: #f5f5f5;
     cursor: pointer;
   }
+
   ul {
     list-style: none;
   }
@@ -48,6 +49,11 @@ export const Globals = styled.div`
     border-top-color: red;
     position: relative;
     top: 100px;
-    left: -80%;
+    left: -20%;
+  }
+  @media screen and (min-width: 900px) {
+    .ring div div {
+      left: 30%;
+    }
   }
 `;
