@@ -2,6 +2,7 @@ import React from 'react'
 import {StyledHeader} from '../styled/header'
 import { Link } from '@reach/router';
 import { ReactComponent as MenuBtn } from '../images/menu-btn.svg';
+import { ReactComponent as User } from '../images/user-solid.svg';
 
 
 function Header({openMenu}) {
@@ -10,10 +11,11 @@ function Header({openMenu}) {
       <p className="nav-btn" id="nav-btn" onClick={openMenu}>
            <MenuBtn/>
           </p>
-      <Link to={'/'}><h2>NC News</h2> </Link>
-      <h4 className='loggedin-user'>
-        jessjelly
-      </h4>
+      <h2><Link to={'/'}>NC News </Link></h2>
+      
+        <Link className='loggedin-user' to={'/user/jessjelly'}> <User/> jessjelly
+</Link>
+      
     </StyledHeader>
     
   )

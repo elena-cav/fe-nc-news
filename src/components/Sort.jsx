@@ -6,6 +6,7 @@ import { ReactComponent as Comment } from '../images/comment-solid.svg';
 function Sort({ sortArticles }) {
   return (
     <>
+    <h4>Sort by</h4>
       <section className="filters">
         <ul>
           <li>

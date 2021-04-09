@@ -2,11 +2,16 @@ import styled from 'styled-components';
 export const Globals = styled.div`
   h1,
   h2,
-  h3,
-  h4 {
+  h3 {
     margin: 0;
     padding: 0.5rem 0 0.5rem 0;
     color: #d5573b;
+  }
+
+  h4 {
+    margin: 0;
+    padding: 0.5rem 0 0.2rem 0;
+    color: #4f6d7a;
   }
   p {
     text-align: left;
@@ -27,11 +32,6 @@ export const Globals = styled.div`
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     transition: all 0.2s linear;
   }
-  button:hover {
-    transform: scale(1.03);
-    background-color: #f5f5f5;
-    cursor: pointer;
-  }
 
   ul {
     list-style: none;
@@ -42,7 +42,7 @@ export const Globals = styled.div`
     font-weight: 600;
   }
   a:hover {
-    opacity: 0.7;
+    opacity: 0.8;
   }
 
   .ring div div {

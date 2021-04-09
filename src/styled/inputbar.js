@@ -15,6 +15,14 @@ export const StyledInputBar = styled.div`
     & textarea {
       max-width: 640px;
       min-width: 200px;
+
+      @media screen and (min-width: 500px) {
+        width: 380px;
+      }
+
+      @media screen and (min-width: 800px) {
+        width: 600px;
+      }
     }
 
     & p {

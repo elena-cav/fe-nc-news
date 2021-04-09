@@ -7,9 +7,9 @@ import Nav from './components/NavBar';
 import { Globals } from './styled/globals';
 import { Container } from './styled/container';
 import ErrorDisplay from './components/ErrorDisplay';
-
+import Deleted from './components/Deleted';
 import React, { Component } from 'react';
-
+import UserPage from './components/UserPage';
 class App extends Component {
   state = {
     isActive: false
@@ -27,8 +27,11 @@ class App extends Component {
           <Header openMenu={this.openMenu} />
           <Router>
             <ArticlesList path="/" />
+            <ArticlesList path="?author=:author" />
+            <Deleted path="articles/:article_id/deleted" />
             <ArticlesList path="/:topic/articles" />
             <Comments path="/articles/:article_id" />
+            <UserPage path="/user/jessjelly" />
             <ErrorDisplay
               default
               status={404}

@@ -1,28 +1,34 @@
 import { StyledInputBar } from '../styled/inputbar';
 import React, { Component } from 'react';
-import ErrorDisplay from './ErrorDisplay';
 
 import * as api from '../utils/api';
 
 class PostComment extends Component {
   state = {
     comment: '',
-    err: null
+    err: null,
+    submitCount: 0,
+    alertMessage: ''
   };
 
   handleInput = (event) => {
     const newComment = this.state.comment;
     event.preventDefault();
     if (newComment === '') {
-      alert('Comment cannot be empty');
+      this.setState({ alertMessage: 'Comment cannot be empty' });
     } else {
+      this.setState({ submitCount: 1, alertMessage: '' });
       api
         .postComment(this.props.id, newComment)
         .then((newComm) => {
           this.setState({ comment: '' });
           this.props.addComment(newComm);
         })
+        .then(() => {
+          this.setState({ submitCount: 0 });
+        })
         .catch((err) => {
+          this.setState({ comment: newComment });
           this.setState({ err });
         });
     }
@@ -34,23 +40,21 @@ class PostComment extends Component {
   };
 
   render() {
-    const { comment, err } = this.state;
-    const { commentCount } = this.props;
-    if (err) {
-      const { response } = err;
-      return <ErrorDisplay status={response.status} msg={response.data.msg} />;
-    }
+    const { comment, err, submitCount, alertMessage } = this.state;
+
     return (
       <StyledInputBar>
+        {err && (
+          <h3>
+            {err.response.status} - {err.response.data.msg}
+          </h3>
+        )}
         <form onSubmit={this.handleInput}>
           <label htmlFor="">Comment as jessjelly</label>
           <textarea value={comment} onChange={this.handleChange}></textarea>
-          {commentCount > 0 && comment !== '' && (
-            <p>You can only post once, come back another time!</p>
-          )}
-
-          <button disabled={commentCount > 0}>Submit</button>
+          <button disabled={submitCount > 0}>Submit</button>
         </form>
+        <p>{alertMessage}</p>
       </StyledInputBar>
     );
   }

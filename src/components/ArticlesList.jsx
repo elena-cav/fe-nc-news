@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import * as api from '../utils/api';
 import { StyledArticles } from '../styled/articles';
-import { Link } from '@reach/router';
+import { navigate } from '@reach/router';
 import ArticleCard from './ArticleCard';
 import Sort from './Sort';
 import ErrorDisplay from './ErrorDisplay';
 import { Ring } from 'react-awesome-spinners';
 import { ReactComponent as Right } from '../images/chevron-circle-right-solid.svg';
 import { ReactComponent as Left } from '../images/chevron-circle-left-solid.svg';
+import queryString from 'query-string';
 
 class ArticlesList extends Component {
   state = {
@@ -17,41 +18,33 @@ class ArticlesList extends Component {
     page: 1,
     sort_by: 'votes',
     total_count: 0,
-    author: ""
+    author: ''
   };
 
-  getArticles = (topic) => {
-    const { sort_by, page, author} = this.state;
-    api
-      .fetchArticles({ topic, sort_by, page, author })
-      .then((articles) => {
-        this.setState({ articles, isLoading: false });
-      })
-      .catch((err) => {
-        this.setState({ err, isLoading: false });
-      });
+  getArticles = (topic, getAuthorFromURL = false) => {
+    const newAuthor = getAuthorFromURL
+      ? queryString.parse(this.props.location.search).author
+      : this.state.author;
+
+    this.setState({ author: newAuthor, isLoading: true }, () => {
+      const { sort_by, page, author } = this.state;
+      api
+        .fetchArticles({ topic, sort_by, page, author })
+        .then((articles) => {
+          this.setState({ articles, isLoading: false });
+        })
+        .catch((err) => {
+          this.setState({ err, isLoading: false });
+        });
+    });
   };
 
   componentDidMount() {
     const { topic } = this.props;
-    this.getArticles(topic);
+    this.getArticles(topic, true);
     const storedSortBy = sessionStorage.getItem('sort_by');
     if (storedSortBy) {
       this.setState({ sort_by: storedSortBy });
-    }
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    const { topic } = this.props;
-    const { page, sort_by, author} = this.state;
-    if (
-      prevProps.topic !== topic ||
-      prevState.sort_by !== sort_by ||
-      prevState.page !== page || 
-      prevState.author !== author
-    ) {
-      this.setState({ isLoading: true });
-      this.getArticles(topic);
     }
   }
 
@@ -62,24 +55,34 @@ class ArticlesList extends Component {
       };
     });
   };
+
   sortArticles = (sort_by) => {
-    this.setState({ sort_by});
+    this.setState({ sort_by });
     sessionStorage.setItem('sort_by', sort_by);
   };
 
   filterByAuthor = (author) => {
-    this.setState({author})
+    const { topic } = this.props;
+    this.setState({ author }, () => {
+      this.getArticles(topic);
+    });
   };
 
+  resetAuthor = () => {
+    navigate('/');
+    this.setState({ author: '' }, () => {
+      this.getArticles(this.props.topic);
+    });
+  };
 
   deleteArticle = (id) => {
-    let articles; 
+    let articles;
     this.setState((currState) => {
       articles = [...currState.articles];
       const newArticles = articles.filter((article) => {
         return article.article_id !== id;
       });
-      return { articles: newArticles};
+      return { articles: newArticles };
     });
     api.deleteItem('articles', id).catch((err) => {
       this.setState({
@@ -88,9 +91,10 @@ class ArticlesList extends Component {
     });
   };
 
-
   render() {
     const { author, articles, isLoading, err, page } = this.state;
+    const { topic } = this.props;
+
     if (isLoading)
       return (
         <div className="ring">
@@ -103,8 +107,17 @@ class ArticlesList extends Component {
     }
     return (
       <StyledArticles>
+        <h2>{topic}</h2>
         <Sort sortArticles={this.sortArticles} />
-        {author !== "" && <Link to={'/'}><button>All articles</button></Link>}
+        {author !== undefined && (
+          <button
+            onClick={() => {
+              this.resetAuthor();
+            }}
+          >
+            All articles
+          </button>
+        )}
 
         <ul>
           {articles.map(

@@ -4,7 +4,9 @@ export const StyledArticles = styled.div`
   flex-direction: column;
   margin-top: 3rem;
   align-items: center;
-
+  h2 {
+    text-transform: uppercase;
+  }
   ul {
     padding-inline-start: 0px;
   }
@@ -34,6 +36,9 @@ export const StyledArticles = styled.div`
         width: 100%;
         height: 100%;
       }
+      &:disabled svg {
+        color: lightgrey;
+      }
     }
 
     & svg:hover {
@@ -60,6 +65,12 @@ export const StyledArticles = styled.div`
       column-gap: 0.3rem;
       margin: 0;
       color: #4f6d7a;
+
+      &:hover {
+        transform: scale(1.03);
+        background-color: #f5f5f5;
+        cursor: pointer;
+      }
     }
     & svg {
       width: 1rem;

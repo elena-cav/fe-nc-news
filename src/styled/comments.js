@@ -7,6 +7,43 @@ export const StyledComments = styled.div`
   padding: 2rem;
   margin-top: 4rem;
   align-items: center;
+  .author-date {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 0.9rem;
+
+    & p {
+      margin: 0.2rem;
+    }
+  }
+  .author {
+    font-size: 0.9rem;
+    margin: 0;
+    padding: 0;
+    text-transform: capitalize;
+    border-radius: 0;
+    border: 0;
+    box-shadow: none;
+    background-color: transparent;
+    cursor: pointer;
+    position: relative;
+
+    &::after {
+      position: absolute;
+      content: '';
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+    }
+    &:hover::after {
+      width: 100%;
+      background-color: #d5573b;
+      transition: all 0.3s linear;
+    }
+  }
 
   p {
     line-height: 1.5rem;
@@ -29,6 +66,10 @@ export const StyledComments = styled.div`
       position: relative;
       width: 1.5rem;
       height: 1.5rem;
+
+      &:disabled svg {
+        color: lightgrey;
+      }
 
       svg {
         position: absolute;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as api from '../utils/api';
-import { Link } from '@reach/router';
+import { Link, navigate } from '@reach/router';
 import { StyledComments } from '../styled/comments';
 import { Ring } from 'react-awesome-spinners';
 import ErrorDisplay from './ErrorDisplay';
@@ -18,7 +18,6 @@ class Comments extends Component {
     article: { created_at: '' },
     isLoading: true,
     page: 1,
-    commentCount: 0,
   };
 
   getComments = () => {
@@ -48,25 +47,35 @@ class Comments extends Component {
   }
 
   deleteComment = (id) => {
+    const { article_id } = this.state.article;
     let comments;
     this.setState((currState) => {
       comments = [...currState.comments];
       const newComments = comments.filter((comment) => {
         return comment.comment_id !== id;
       });
-      return { comments: newComments};
+      return { comments: newComments };
     });
-    api.deleteItem('comments', id).catch((err) => {
-      this.setState({
-        comments
+    this.setState({ isLoading: true });
+    api
+      .deleteItem('comments', id)
+      .then(() => {
+        navigate(`/articles/${article_id}/deleted`);
+      })
+      .catch((err) => {
+        navigate(`/articles/${article_id}/deleted`, { state: { err } }).then(
+          () => {
+            this.setState({
+              comments
+            });
+          }
+        );
       });
-    });
   };
 
   addComment = (newComment) => {
     this.setState((currState) => {
       return {
-        commentCount: 1, 
         comments: [newComment, ...currState.comments]
       };
     });
@@ -101,7 +110,6 @@ class Comments extends Component {
 
     if (err) {
       const { response } = err;
-      console.log(response);
       return <ErrorDisplay status={response.status} msg={response.data.msg} />;
     }
     return (
@@ -114,36 +122,45 @@ class Comments extends Component {
           </Link>
         </span>
         <section className="article">
-          <p>
-            Posted by {author} on {convertedTime}
-          </p>
+          <span className="author-date">
+            <p>Posted by </p>
+            <Link to={`/?author=${author}`}>
+              <button className="author">{author}</button>
+            </Link>
+            <p>on {convertedTime}</p>
+          </span>
           <h2>{title}</h2>
           <p>{body}</p>
           <Vote votes={votes} id={article_id} item="articles" />
         </section>
-        <PostComment commentCount={this.state.commentCount} addComment={this.addComment} id={article_id} />
+        <PostComment
+          addComment={this.addComment}
+          id={article_id}
+        />
         <CommentCard deleteComment={this.deleteComment} comments={comments} />
-        <span className="page-btn-wrapper">
-          <button
-            disabled={page === 1}
-            onClick={() => {
-              this.changePage(-1);
-            }}
-          >
-            <Left />
-            Previous
-          </button>
-          <span> {this.state.page}</span>
-          <button
-            disabled={page * 10 > comments.length}
-            onClick={() => {
-              this.changePage(+1);
-            }}
-          >
-            <Right />
-            Next
-          </button>
-        </span>
+        {comments.length > 10 && 
+          <span className="page-btn-wrapper">
+            <button
+              disabled={page === 1}
+              onClick={() => {
+                this.changePage(-1);
+              }}
+            >
+              <Left />
+              Previous
+            </button>
+            <span> {this.state.page}</span>
+            <button
+              disabled={page * 10 > comments.length}
+              onClick={() => {
+                this.changePage(+1);
+              }}
+            >
+              <Right />
+              Next
+            </button>
+          </span>
+        }
       </StyledComments>
     );
   }

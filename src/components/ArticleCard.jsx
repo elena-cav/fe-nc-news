@@ -5,34 +5,33 @@ import Vote from './Vote';
 import { convertTime } from '../utils/utils';
 import { ReactComponent as Star } from '../images/asterisk-solid.svg';
 
-
 function ArticleCard({
-    author,
-    title,
-    topic,
-    created_at,
-    votes,
-    article_id,
-    comment_count,
-    filterByAuthor,
-    deleteArticle
-  } ) {
-
+  author,
+  title,
+  topic,
+  created_at,
+  votes,
+  article_id,
+  comment_count,
+  filterByAuthor,
+  deleteArticle
+}) {
   const convertedTime = convertTime(created_at);
 
   return (
     <StyledArticleCard>
       <span className="author-date">
         <p>Posted by </p>
-        <p
-          className="author"
-          onClick={() => {
-            filterByAuthor(author);
-          }}
-        >
-          {' '}
-          {author}
-        </p>
+        <Link to={`?author=${author}`}>
+          <button
+            className="author"
+            onClick={() => {
+              filterByAuthor(author);
+            }}
+          >
+            {author}
+          </button>
+        </Link>
         <p>on {convertedTime}</p>
       </span>
       <span className="topic">

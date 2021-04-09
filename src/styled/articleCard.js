@@ -23,6 +23,14 @@ export const StyledArticleCard = styled.div`
   }
 
   .author {
+    font-size: 0.9rem;
+    margin: 0;
+    padding: 0;
+    text-transform: capitalize;
+    border-radius: 0;
+    border: 0;
+    box-shadow: none;
+    background-color: transparent;
     cursor: pointer;
     position: relative;
 
