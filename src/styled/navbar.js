@@ -58,9 +58,5 @@ export const StyledNavBar = styled.div`
     .nav-close {
       display: none;
     }
-    /* color: ${(props) => (!props.isInputActive ? '#fff1e6' : '#a5a58d')}; */
   }
 `;
-
-// ${(props) =>
-//         !props.isActive ? '#fff1e6' : '#a5a58d'};

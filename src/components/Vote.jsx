@@ -7,16 +7,30 @@ import { ReactComponent as Down } from '../images/thumbs-down-regular.svg';
 class Vote extends React.Component {
   state = {
     votesUpdates: 0,
+    hasVoted: false
   };
 
+
+  // componentDidMount() {
+  //   console.dir(sessionStorage, localStorage)
+  //   const storedVoted = sessionStorage.getItem('hasVoted');
+  //   const storedId = sessionStorage.getItem('id');
+  //   if (storedVoted ) {
+  //     this.setState({ hasVoted: true});
+  //   }
+  // }
+
   updateVotes = (id, increment, item) => {
+    this.setState({hasVoted: true})
     this.setState((currState) => {
       
       return {
         votesUpdates: currState.votesUpdates + increment
       };
     });
-    api.patchVotes(id, increment, item).catch((err) => {
+    api.patchVotes(id, increment, item).then(() => {
+          // sessionStorage.setItem('hasVoted', true)
+    }).catch((err) => {
       this.setState((currState) => {
         return {
           votesUpdates: currState.votesUpdates - increment
@@ -27,11 +41,11 @@ class Vote extends React.Component {
 
   render() {
     const { id, votes, item } = this.props;
-    const { votesUpdates } = this.state;
+    const { votesUpdates, hasVoted} = this.state;
     return (
       <StyledButtons>
         
-        <button className='btn'
+        <button disabled={hasVoted} className='btn'
           onClick={() => {
             this.updateVotes(id, 1, item);
           }}
@@ -39,7 +53,7 @@ class Vote extends React.Component {
           <Up />
         </button>
         <p className="votes">{votes + votesUpdates}</p>
-        <button className='btn'
+        <button disabled={hasVoted} className='btn'
           onClick={() => {
             this.updateVotes(id, -1, item);
           }}

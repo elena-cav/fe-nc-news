@@ -21,10 +21,14 @@ export const StyledButtons = styled.div`
     width: 1.2rem;
     height: 1.2rem;
 
-    .btn:hover {
-      transform: scale(0) (0);
-      background-color: white;
-      cursor: pointer;
+    & :hover {
+        cursor: pointer;
+        opacity: 0.8
+      }
+
+    &:disabled svg {
+      color: lightgrey;
+    }
     }
 
     svg {

@@ -7,6 +7,12 @@ export const StyledComments = styled.div`
   padding: 2rem;
   margin-top: 4rem;
   align-items: center;
+
+  .delete-btn:hover {
+    transform: scale(1.03);
+    background-color: #f5f5f5;
+    cursor: pointer;
+  }
   .author-date {
     display: flex;
     flex-direction: row;
@@ -82,6 +88,8 @@ export const StyledComments = styled.div`
 
     & svg:hover {
       opacity: 0.8;
+        cursor: pointer;
+      }
     }
   }
 
@@ -111,5 +119,11 @@ export const StyledComments = styled.div`
     align-items: center;
     justify-content: center;
     max-width: 640px;
+
+    button:hover {
+      transform: scale(1.03);
+      background-color: #f5f5f5;
+      cursor: pointer;
+    }
   }
 `;

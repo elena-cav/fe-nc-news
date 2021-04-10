@@ -17,7 +17,7 @@ class Comments extends Component {
     comments: [],
     article: { created_at: '' },
     isLoading: true,
-    page: 1,
+    page: 1
   };
 
   getComments = () => {
@@ -45,6 +45,17 @@ class Comments extends Component {
       this.getComments();
     }
   }
+
+  deleteArticle = (id) => {
+    api
+      .deleteItem('articles', id)
+      .then(() => {
+        navigate(`/articles/${id}/deleted`, { state: { item: 'articles' } });
+      })
+      .catch((err) => {
+        navigate(`/articles/${id}/deleted`, { state: { err } });
+      });
+  };
 
   deleteComment = (id) => {
     const { article_id } = this.state.article;
@@ -90,7 +101,15 @@ class Comments extends Component {
   };
 
   render() {
-    const { comments, article, err, isLoading, page } = this.state;
+
+    
+    const {
+      comments,
+      article,
+      err,
+      isLoading,
+      page,
+    } = this.state;
     const {
       author,
       title,
@@ -100,6 +119,7 @@ class Comments extends Component {
       created_at,
       topic
     } = article;
+
     const convertedTime = convertTime(created_at);
     if (isLoading)
       return (
@@ -131,14 +151,22 @@ class Comments extends Component {
           </span>
           <h2>{title}</h2>
           <p>{body}</p>
-          <Vote votes={votes} id={article_id} item="articles" />
+
+          {author === 'jessjelly' ? (
+            <button className='delete-btn'
+              onClick={() => {
+                this.deleteArticle(article_id);
+              }}
+            >
+              delete article
+            </button>
+          ) : (
+            <Vote votes={votes} id={article_id} item="articles" />
+          )}
         </section>
-        <PostComment
-          addComment={this.addComment}
-          id={article_id}
-        />
+        <PostComment addComment={this.addComment} id={article_id} />
         <CommentCard deleteComment={this.deleteComment} comments={comments} />
-        {comments.length > 10 && 
+        {/* {comments.length > 10 && ( */}
           <span className="page-btn-wrapper">
             <button
               disabled={page === 1}
@@ -160,7 +188,7 @@ class Comments extends Component {
               Next
             </button>
           </span>
-        }
+        
       </StyledComments>
     );
   }

@@ -15,9 +15,9 @@ class UserPage extends Component {
     const { user } = this.state;
     return (
       <StyledUser>
-                <img src={user.avatar_url} alt="" />
+        <h2>Account</h2>
+        <img src={user.avatar_url} alt="" />
         <h4>Username: {user.username}</h4>
-
         <h4>Name: {user.name}</h4>
       </StyledUser>
     );

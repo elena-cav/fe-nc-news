@@ -9,6 +9,12 @@ export const StyledInputBar = styled.div`
     row-gap: 1rem;
     align-items: center;
 
+    button:hover {
+      transform: scale(1.03);
+      background-color: #f5f5f5;
+      cursor: pointer;
+    }
+
     & label {
       color: #4f6d7a;
     }

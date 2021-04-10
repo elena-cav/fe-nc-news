@@ -28,7 +28,6 @@ export const StyledArticles = styled.div`
       position: relative;
       width: 1.5rem;
       height: 1.5rem;
-
       svg {
         position: absolute;
         top: 0;
@@ -78,5 +77,14 @@ export const StyledArticles = styled.div`
     }
     & p {
     }
+  }
+  button:hover {
+    transform: scale(1.03);
+    background-color: #f5f5f5;
+    cursor: pointer;
+  }
+
+  .delete-btn button:hover {
+    cursor: pointer;
   }
 `;

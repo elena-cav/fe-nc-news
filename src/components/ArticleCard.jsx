@@ -46,7 +46,7 @@ function ArticleCard({
         {comment_count} comments
       </Link>
       {author === 'jessjelly' ? (
-        <button
+        <button className='delete-btn'
           onClick={() => {
             deleteArticle(article_id);
           }}

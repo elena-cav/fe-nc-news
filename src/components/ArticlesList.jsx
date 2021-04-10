@@ -48,6 +48,19 @@ class ArticlesList extends Component {
     }
   }
 
+ componentDidUpdate(prevProps, prevState) {
+    const { topic } = this.props;
+    const { page, sort_by, author} = this.state;
+    if (
+      prevProps.topic !== topic ||
+      prevState.sort_by !== sort_by ||
+      prevState.page !== page || 
+      prevState.author !== author
+    ) {
+      this.setState({ isLoading: true });
+      this.getArticles(topic);
+    }
+  }
   changePage = (inc) => {
     this.setState((currState) => {
       return {
@@ -58,14 +71,11 @@ class ArticlesList extends Component {
 
   sortArticles = (sort_by) => {
     this.setState({ sort_by });
-    sessionStorage.setItem('sort_by', sort_by);
+    sessionStorage.setItem('sort_by', sort_by)
   };
 
   filterByAuthor = (author) => {
-    const { topic } = this.props;
-    this.setState({ author }, () => {
-      this.getArticles(topic);
-    });
+    this.setState({ author });
   };
 
   resetAuthor = () => {
@@ -84,10 +94,17 @@ class ArticlesList extends Component {
       });
       return { articles: newArticles };
     });
-    api.deleteItem('articles', id).catch((err) => {
-      this.setState({
-        articles
-      });
+    api.deleteItem('articles', id).then(() => {
+        navigate(`/articles/${id}/deleted`, {state: {item: 'articles'}});
+      })
+      .catch((err) => {
+        navigate(`/articles/${id}/deleted`, { state: { err } }).then(
+          () => {
+            this.setState({
+              articles
+            });
+          }
+        );
     });
   };
 
