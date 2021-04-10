@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  flex-grow: 1;
   background-color: #f5f5f5;
-  /* transition: background-color 0.3s ease-in-out; */
   background-size: cover;
   padding: 2rem;
   box-sizing: border-box;

@@ -10,6 +10,7 @@ import ErrorDisplay from './components/ErrorDisplay';
 import Deleted from './components/Deleted';
 import React, { Component } from 'react';
 import UserPage from './components/UserPage';
+import Footer from './components/Footer';
 class App extends Component {
   state = {
     isActive: false
@@ -39,6 +40,7 @@ class App extends Component {
             />
           </Router>
         </Container>
+        <Footer />
       </Globals>
     );
   }

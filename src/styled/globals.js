@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 export const Globals = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   h1,
   h2,
   h3 {
