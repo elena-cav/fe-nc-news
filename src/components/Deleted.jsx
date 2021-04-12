@@ -3,7 +3,6 @@ import { Link } from '@reach/router';
 import { StyledDeleted } from '../styled/deleted';
 
 function Deleted(props) {
-  console.log(props.location.state)
 
   if (props.location.state.err) return (
   <StyledDeleted>

@@ -29,7 +29,8 @@ class Vote extends React.Component {
       };
     });
     api.patchVotes(id, increment, item).then(() => {
-          // sessionStorage.setItem('hasVoted', true)
+      //collection of ids array or obj
+          sessionStorage.setItem('id', id)
     }).catch((err) => {
       this.setState((currState) => {
         return {

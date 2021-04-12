@@ -10,6 +10,16 @@ export const fetchTopics = () => {
   });
 };
 
+export const postTopic = (slug, description) => {
+  const body = {
+    slug,
+    description
+  };
+  return request.post('/topics', body).then(({ data }) => {
+    return data;
+  });
+};
+
 export const fetchArticles = ({ topic, sort_by, page, author } = {}) => {
   return request
     .get('/articles', { params: { p: page, topic, sort_by, author } })

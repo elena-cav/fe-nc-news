@@ -38,7 +38,7 @@ export const StyledNavBar = styled.div`
 
   .nav-items {
     padding: 0;
-    margin: 0;
+    margin: 0 0 3rem 0;
 
     svg {
       width: 1em;
@@ -58,5 +58,18 @@ export const StyledNavBar = styled.div`
     .nav-close {
       display: none;
     }
+  }
+
+  .post {
+    font-size: 1rem;
+    box-shadow: 0 0 7px #00000044;
+    margin: 0.5rem 2rem;
+    padding: 0.5rem;
+    text-align: center;
+  }
+
+  .post a {
+    color: #4f6d7a;
+    text-transform: uppercase;
   }
 `;

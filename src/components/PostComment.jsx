@@ -50,7 +50,7 @@ class PostComment extends Component {
           </h3>
         )}
         <form onSubmit={this.handleInput}>
-          <label htmlFor="">Comment as jessjelly</label>
+          <label >Comment as jessjelly</label>
           <textarea value={comment} onChange={this.handleChange}></textarea>
           <button disabled={submitCount > 0}>Submit</button>
         </form>

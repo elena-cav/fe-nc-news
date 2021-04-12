@@ -8,7 +8,10 @@ function ErrorDisplay({status, msg}) {
     <StyledError>
     <h2>{status} - {msg}</h2>
     <img className='main-img' src={Travolta} alt="animated gif of John Travolta looking around"/>
-    <h3>You can navigate to the <Link to={'/'}>homepage</Link> to find your way back 😉</h3>
+    <div className='btn-wrapper'>
+     <Link className='err-btn' to={'/new-topic'}>Post new Topic</Link>  
+      <Link className='err-btn' to={'/'}>Back to Home</Link>
+      </div>
     </StyledError>
   )
 }

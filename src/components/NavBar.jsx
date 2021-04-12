@@ -1,30 +1,15 @@
-import React, { Component } from 'react';
 import { Link } from '@reach/router';
 import { StyledNavBar } from '../styled/navbar';
 import { ReactComponent as HomeIcon } from '../images/home.svg';
 import { ReactComponent as CloseBtn } from '../images/times-solid.svg';
+import React from 'react'
 
-import * as api from '../utils/api';
+function Nav(props) {
 
-class Nav extends Component {
-  state = {
-    topics: [],
-  };
-  componentDidMount() {
-    api.fetchTopics().then((topics) => {
-      this.setState({ topics });
-    });
-  }
+const {isActive, openMenu, topics } = props;
 
-
-  render() {
-    const {isActive, openMenu } = this.props;
-    const {topics} = this.state
-
-    return (
-
-
-      <StyledNavBar isActive={isActive}>
+  return (
+     <StyledNavBar isActive={isActive}>
         <header>
           <nav className={`navbar${isActive ? ' navbar--open' : ''}`}>
             <div className="navbar-header">
@@ -50,12 +35,19 @@ class Nav extends Component {
                   );
                 })}
               </ul>
+              <div className='post'>
+                <Link to={'/new-topic'}>Post topic</Link>
+
+              </div>
+             
             </div>
           </nav>
         </header>
       </StyledNavBar>
-    );
-  }
+    
+  )
 }
 
-export default Nav;
+export default Nav
+
+

@@ -86,25 +86,12 @@ class ArticlesList extends Component {
   };
 
   deleteArticle = (id) => {
-    let articles;
-    this.setState((currState) => {
-      articles = [...currState.articles];
-      const newArticles = articles.filter((article) => {
-        return article.article_id !== id;
-      });
-      return { articles: newArticles };
-    });
+
     api.deleteItem('articles', id).then(() => {
         navigate(`/articles/${id}/deleted`, {state: {item: 'articles'}});
       })
       .catch((err) => {
-        navigate(`/articles/${id}/deleted`, { state: { err } }).then(
-          () => {
-            this.setState({
-              articles
-            });
-          }
-        );
+        navigate(`/articles/${id}/deleted`, { state: { err } })
     });
   };
 
